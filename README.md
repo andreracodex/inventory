@@ -41,8 +41,9 @@ Sebelum menjalankan aplikasi ini, pastikan Anda memiliki:
     php artisan serve
     ```
 
-# Dibuat dan dikembangkan oleh Tirta Rachmandiri untuk platform berdikari.web.id
+### Dibuat dan dikembangkan oleh Tirta Rachmandiri untuk platform berdikari.web.id
 
 ### Penjelasan
 
 -   **Informasi Kontak**: (+62) 858 2136 4004.
+-   **Informasi Kerjasama**: racodex@gmail.com.
