@@ -416,6 +416,8 @@
                     @csrf
                     @method('PUT') <!-- Use this to specify the PUT method -->
                     <input type="hidden" name="id">
+                    <input type="text" hidden aria-hidden="true" name="user_id" id="user_id"
+                        value="{{ Auth::user()->id }}">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Name</label>
