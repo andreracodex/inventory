@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/category/{id}/duplicate', [CategoryController::class, 'duplicate'])->name('category.duplicate');
     Route::resource('category', CategoryController::class);
 
-    Route::get('/units-data', [UnitsController::class, 'getUnitsData'])->name('units.data');
-    Route::post('/units/{id}/duplicate', [UnitsController::class, 'duplicate'])->name('units.duplicate');
+    Route::get('/unit-data', [UnitsController::class, 'getUnitsData'])->name('unit.data');
+    Route::post('/unit/{id}/duplicate', [UnitsController::class, 'duplicate'])->name('unit.duplicate');
     Route::resource('units', UnitsController::class);
 
     Route::get('/users-data', [UsersController::class, 'getUsersData'])->name('users.data');

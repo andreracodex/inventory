@@ -46,7 +46,7 @@ class CategoryController extends Controller
     {
         // Validate incoming request data
         $validatedData = $request->validate([
-            'id' => 'required|exists:products,id',
+            'id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
         ]);
 

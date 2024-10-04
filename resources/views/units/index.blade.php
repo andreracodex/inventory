@@ -6,7 +6,7 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{{ route('units.data') }}',
+                ajax: '{{ route('unit.data') }}',
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -179,7 +179,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/category/' + id,
+                        url: '/units/' + id,
                         method: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -219,7 +219,7 @@
                 if (result.isConfirmed) {
                     // Proceed with the AJAX request to duplicate the product
                     $.ajax({
-                        url: '/units/' + id + '/duplicate',
+                        url: '/unit/' + id + '/duplicate',
                         method: 'POST',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -255,7 +255,7 @@
                 error: function() {
                     Swal.fire(
                         'Error!',
-                        'Erorr fetching category.',
+                        'Erorr fetching unit.',
                         'error'
                     );
                 }
@@ -267,12 +267,12 @@
                 url: '/units/' + id + '/edit',
                 method: 'GET',
                 success: function(data) {
-                    $('#editUnitsForm').find('input[name="id"]').val(data.category.id);
-                    $('#editUnitsForm').find('input[name="name"]').val(data.category.name);
+                    $('#editUnitsForm').find('input[name="id"]').val(data.unit.id);
+                    $('#editUnitsForm').find('input[name="name"]').val(data.unit.name);
                     $('#editUnitsModal').modal('show'); // Show the modal
                 },
                 error: function() {
-                    alert('Error fetching product details for editing.');
+                    alert('Error fetching unit for editing.');
                 }
             });
         }

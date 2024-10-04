@@ -35,10 +35,10 @@ class UnitsController extends Controller
     // Function to show the edit form for a specific product
     public function edit($id)
     {
-        $units = Unit::findOrFail($id);
+        $unit = Unit::findOrFail($id);
 
         return response()->json([
-            'units' => $units,
+            'unit' => $unit,
         ]);
     }
 
@@ -46,7 +46,7 @@ class UnitsController extends Controller
     {
         // Validate incoming request data
         $validatedData = $request->validate([
-            'id' => 'required|exists:products,id',
+            'id' => 'required|exists:units,id',
             'name' => 'required|string|max:255',
         ]);
 
@@ -55,7 +55,7 @@ class UnitsController extends Controller
         $units->update($validatedData);
 
         // Redirect back with a success message
-        return redirect()->route('category.index')->with('success', 'Units updated successfully!');
+        return redirect()->route('units.index')->with('success', 'Units updated successfully!');
     }
 
     // Add the delete method for deleting a product
