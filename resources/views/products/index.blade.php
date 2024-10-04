@@ -428,11 +428,17 @@
                         <div class="form-group">
                             <label for="category_id">Category</label>
                             <select name="category_id" class="form-control" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="unit_id">Unit</label>
                             <select name="unit_id" class="form-control" required>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -466,6 +472,8 @@
                 <div class="modal-body">
                     <form id="createProductForm">
                         @csrf
+                        <input type="text" hidden aria-hidden="true" name="user_id" id="user_id"
+                            value="{{ Auth::user()->id }}">
                         <div class="form-group">
                             <label for="name">Product Name</label>
                             <input type="text" class="form-control" name="name" required>
@@ -473,6 +481,22 @@
                         <div class="form-group">
                             <label for="price">Price</label>
                             <input type="number" min="0" class="form-control" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Category</label>
+                            <select name="category_id" class="form-control" required>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="unit_id">Unit</label>
+                            <select name="unit_id" class="form-control" required>
+                                @foreach ($units as $unit)
+                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="minimal_stock">Minimal Stock</label>
