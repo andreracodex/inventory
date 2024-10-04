@@ -32,5 +32,17 @@ Sebelum menjalankan aplikasi ini, pastikan Anda memiliki:
 
     ```bash
     git clone https://github.com/andreracodex/inventory.git
-    cd inventory-qu
+    cd inventory
+    composer install
+    cp .env.example .env
+    php artisan migrate:fresh --seed
+    npm install
+    npm run dev
+    php artisan serve
     ```
+
+# Dibuat dan dikembangkan oleh Tirta Rachmandiri untuk platform berdikari.web.id
+
+### Penjelasan
+
+-   **Informasi Kontak**: (+62) 858 2136 4004.
