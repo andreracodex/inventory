@@ -9,9 +9,7 @@ use App\Http\Controllers\UnitsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [DashboardController::class, 'home'])->name('frontend');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

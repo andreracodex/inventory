@@ -27,14 +27,22 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}" />
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed sidenav-toggled">
     @yield('loginregforgot')
     @auth
-        <main>
-            @yield('contenthead')
-            <!-- Main page content-->
-            @yield('content')
-        </main>
+        @include('layouts.partials.headerpos')
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    @yield('contenthead')
+                    <!-- Main page content-->
+                    @yield('content')
+                </main>
+                @include('layouts.partials.footer')
+            </div>
+        </div>
         <script src="{{ asset('js/jquery-3.6.4.min.js') }}"></script>
         <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
         <!-- Latest jQuery -->

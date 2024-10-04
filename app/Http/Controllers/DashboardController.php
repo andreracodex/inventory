@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,20 @@ class DashboardController extends Controller
             ->where('stock', '<=', 2)
             ->count();
 
-        return view('dashboard', compact('count', 'stock', 'stock_min'));
+        if (Auth::user()->user_type == 'admin') {
+            return view('dashboard', compact('count', 'stock', 'stock_min'));
+        } else {
+            $products = Product::where('stock', '>', 1)
+                ->where('is_active', 1)
+                ->limit(12)
+                ->get();
+
+            return view('products.consume', compact('products'));
+        }
+    }
+
+    public function home()
+    {
+        return view('welcome');
     }
 }

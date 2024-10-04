@@ -64,6 +64,9 @@
                         <button class="btn btn-sm btn-primary place-order">
                             <i data-feather="shopping-bag"></i>&nbsp;Place Order
                         </button>
+                        <button class="btn btn-sm btn-danger remove-all">
+                            <i data-feather="trash-2"></i>&nbsp;Remove All
+                        </button>
                     </div>
                 </div>
             </div>
@@ -165,6 +168,32 @@
 
         // Initial display of the cart
         updateCartDisplay();
+
+        // Add event listener for "Remove All" button
+        document.querySelector('.remove-all').addEventListener('click', function() {
+            if (cart.length === 0) {
+                Swal.fire('Info', 'Your cart is already empty.', 'info');
+                return;
+            }
+
+            // Restore stock for all items in the cart
+            cart.forEach(item => {
+                const stockElement = document.getElementById(`stock-${item.product_id}`);
+                let stockText = stockElement.textContent;
+                let stockMatch = stockText.match(/Stock:\s*(\d+)/);
+                let stock = stockMatch ? parseInt(stockMatch[1]) : 0;
+
+                stock += item.quantity; // Restore stock
+                stockElement.textContent = `Stock: ${stock}`;
+            });
+
+            // Clear the cart
+            cart = [];
+            saveCartToLocalStorage(); // Save updated cart to local storage
+            updateCartDisplay(); // Update display
+
+            Swal.fire('Success!', 'All items have been removed from the cart.', 'success');
+        });
 
         // Place order event listener
         document.querySelector('.place-order').addEventListener('click', function() {
