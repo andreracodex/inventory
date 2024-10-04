@@ -39,6 +39,6 @@ class OrderController extends Controller
         });
 
         // Return a response (you can include more data as needed)
-        return response()->json(['order' => $order], 201);
+        return response()->json('Ok');
     }
 }
