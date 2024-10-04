@@ -327,13 +327,13 @@
                     <div class="col-auto mb-3">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="list"></i></div>
-                            Product List
+                            User List
                         </h1>
                     </div>
                     <div class="col-12 col-xl-auto mb-3">
                         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                             data-bs-target="#createProductModal">
-                            <i class="fa-solid fa-plus"></i> Create Product
+                            <i class="fa-solid fa-plus"></i> Create Users
                         </button>
                     </div>
                 </div>

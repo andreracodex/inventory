@@ -161,7 +161,7 @@ class ProductController extends Controller
         $products = Product::where('stock', '>', 1)
             ->where('is_active', 1)
             ->where('name', 'like', "%{$searchTerm}%")
-            ->limit(12)
+            ->limit(10)
             ->get();
         return view('products.consume', compact('products', 'searchTerm'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,26 +20,35 @@ class OrderController extends Controller
             'total_amount' => 'required|numeric',
         ]);
 
-        // Start a database transaction
-        DB::transaction(function () use ($request) {
-            // Create a new order
-            $order = Order::create([
-                'user_id' => Auth::id(), // Assuming the user is authenticated
-                'total_amount' => $request->total_amount,
+        // Create the order
+        $order = Order::create([
+            'user_id' => Auth::user()->id, // Get the authenticated user ID
+            'total_amount' => $request->total_amount,
+        ]);
+
+        // Create order details for each item in the cart
+        foreach ($request->items as $item) {
+            // Create the order detail
+            $orderDetail = OrderDetails::create([
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
             ]);
 
-            // Create order details
-            foreach ($request->items as $item) {
-                OrderDetails::create([
-                    'order_id' => $order->id,
-                    'product_id' => $item['product_id'],
-                    'quantity' => $item['quantity'],
-                    'price' => $item['price'],
-                ]);
+            // Consume stock
+            $product = Product::find($item['product_id']);
+            if ($product) {
+                // Check if there is enough stock to fulfill the order while maintaining minimal stock
+                if ($product->stock >= ($item['quantity'] + $product->minimal_stock)) {
+                    $product->stock -= $item['quantity']; // Decrease stock by quantity ordered
+                    $product->save(); // Save the updated stock
+                } else {
+                    return response()->json(['error' => 'Insufficient stock for product ' . $product->name], 400);
+                }
             }
-        });
+        }
 
-        // Return a response (you can include more data as needed)
-        return response()->json('Ok');
+        return response()->json(['order' => $order], 201);
     }
 }
